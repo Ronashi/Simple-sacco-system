@@ -89,7 +89,7 @@ public:
     }
     Member get_depositor() {
         return depositor;
-    }
+    }T
     string get_date() {
         return date;
     }
@@ -103,7 +103,7 @@ private:
     vector<Loan> loans;
     vector<Deposit> deposits;
 public:
-    Account(int account_id_num, float account_balance, Member account_owner_member) {
+    Account(int account_id_num, float account_balance, Member account_owner_member){
         account_id = account_id_num;
         balance = account_balance;
         account_owner = account_owner_member;
@@ -139,8 +139,8 @@ public:
 int main() {
    
     Member member1(1, "Ronald Smiles", "Westlands, Nairobi", "079233393", "DoubleR@gmail.com");
-    Member member2(2, "Marion Ythera", "Chiromo, Nairobi", "0714111439", "  MarioY12@gmail.com");
-    Member member3(3, "Job Newton", "Chiromo, Nairobi", "0714111439", " JobNewton@gmail.com");
+    Member member2(2, "Marion Ythera", "Chiromo, Nairobi", "0714111439", "MarioY12@gmail.com");
+    Member member3(3, "Job Newton", "Chiromo, Nairobi", "0798932947", "JobNewton@gmail.com");
 
     Loan loan1(1, 5000000.0, 0.05, 12, member1);
     Loan loan2(2, 1000000.0, 0.06, 24, member2);
