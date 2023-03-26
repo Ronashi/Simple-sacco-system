@@ -136,28 +136,38 @@ class Account {
 };
 
 int main() {
-    Member member1(1, "Christina Kawira", "123 Main St", "555-1234", "john.smith@example.com");
-    Member member2(2, "Ronald Smiles", "456 Oak Ave", "555-5678", "jane.doe@example.com");
+   
+    Member member1(1, "Ronald Smiles", "Westlands, Nairobi", "079233393", "DoubleR@gmail.com");
+    Member member2(2, "Marion Ythera", "Chiromo, Nairobi", "0714111439", "  MarioY12@gmail.com");
+    Member member3(3, "Job Newton", "Chiromo, Nairobi", "0714111439", " JobNewton@gmail.com");
+
+    Loan loan1(1, 5000000.0, 0.05, 12, member1);
+    Loan loan2(2, 1000000.0, 0.06, 24, member2);
+    Loan loan3(3, 1000000.0, 0.06, 24, member3);
     
-    Loan loan1(1, 5000.0, 0.05, 12, member1);
-    Loan loan2(2, 10000.0, 0.06, 24, member2);
+    Deposit deposit1(1, 1000.0, member1, "2023-01-01");
+    Deposit deposit2(2, 2000.0, member2, "2023-03-24");
+    Deposit deposit3(3, 2000.0, member3, "2023-03-22");
     
-    Deposit deposit1(1, 1000.0, member1, "2022-01-01");
-    Deposit deposit2(2, 2000.0, member2, "2022-02-01");
-    
+   
     Account account1(1, 0, member1);
     Account account2(2, 0, member2);
+    Account account3(3, 0, member3);
     
-    
+   
     account1.add_loan(loan1);
     account1.add_deposit(deposit1);
     
+    
     account2.add_loan(loan2);
     account2.add_deposit(deposit2);
+
+    account3.add_loan(loan3);
+    account3.add_deposit(deposit3);
     
-    
-    cout << "Account 1 balance: " << account1.get_balance() << endl;
-    cout << "Account 2 balance: " << account2.get_balance() << endl;
-    
+  
+     cout << "Account 1 balance: " << account1.get_balance() << endl;
+     cout << "Account 2 balance: " << account2.get_balance() << endl;
+     cout << "Account 3 balance: " << account3.get_balance() << endl;
     return 0;
 }
