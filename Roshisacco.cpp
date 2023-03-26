@@ -5,13 +5,13 @@
 using namespace std;
 
 class Member {
-  private:
+private:
     int id;
     string name;
     string address;
     string phone;
     string email;
-  public:
+public:
     Member(int member_id, string member_name, string member_address, string member_phone, string member_email) {
         id = member_id;
         name = member_name;
@@ -37,13 +37,13 @@ class Member {
 };
 
 class Loan {
-  private:
+private:
     int loan_id;
     float amount;
     float interest_rate;
     int repayment_period;
     Member borrower;
-  public:
+public:
     Loan(int loan_id_num, float loan_amount, float interest_rate_num, int repayment_period_num, Member borrower_member) {
         loan_id = loan_id_num;
         amount = loan_amount;
@@ -69,12 +69,12 @@ class Loan {
 };
 
 class Deposit {
-  private:
+private:
     int deposit_id;
     float amount;
     Member depositor;
     string date;
-  public:
+public:
     Deposit(int deposit_id_num, float deposit_amount, Member depositor_member, string deposit_date) {
         deposit_id = deposit_id_num;
         amount = deposit_amount;
@@ -96,13 +96,13 @@ class Deposit {
 };
 
 class Account {
-  private:
+private:
     int account_id;
     float balance;
     Member account_owner;
     vector<Loan> loans;
     vector<Deposit> deposits;
-  public:
+public:
     Account(int account_id_num, float account_balance, Member account_owner_member) {
         account_id = account_id_num;
         balance = account_balance;
@@ -122,8 +122,9 @@ class Account {
     }
     void add_deposit(Deposit deposit) {
         deposits.push_back(deposit);
-        balance += deposit.get_amount();
+        balance -= deposit.get_amount();
     }
+    
     void print_transactions() {
         cout << "Transactions for account " << account_id << ":" << endl;
         for (int i = 0; i < deposits.size(); i++) {
