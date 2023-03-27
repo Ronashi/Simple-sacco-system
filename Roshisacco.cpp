@@ -136,45 +136,115 @@ public:
     }
 };
 
-// int main() {
+int main() {
    
-//     Member member1(1, "Ronald Smiles", "Westlands, Nairobi", "079233393", "DoubleR@gmail.com");
-//     Member member2(2, "Marion Ythera", "Chiromo, Nairobi", "0714111439", "MarioY12@gmail.com");
-//     Member member3(3, "Job Newton", "Chiromo, Nairobi", "0798932947", "JobNewton@gmail.com");
+    Member member1(1, "Ronald Smiles", "Westlands, Nairobi", "079233393", "DoubleR@gmail.com");
+    Member member2(2, "Marion Ythera", "Chiromo, Nairobi", "0714111439", "MarioY12@gmail.com");
+    Member member3(3, "Job Newton", "Chiromo, Nairobi", "0798932947", "JobNewton@gmail.com");
 
-//     Loan loan1(1, 5000000.0, 0.05, 12, member1);
-//     Loan loan2(2, 1000000.0, 0.06, 24, member2);
-//     Loan loan3(3, 1000000.0, 0.06, 24, member3);
+    Loan loan1(1, 5000000.0, 0.05, 12, member1);
+    Loan loan2(2, 1000000.0, 0.06, 24, member2);
+    Loan loan3(3, 1000000.0, 0.06, 24, member3);
     
-//     Deposit deposit1(1, 1000.0, member1, "2023-01-01");
-//     Deposit deposit2(2, 2000.0, member2, "2023-03-24");
-//     Deposit deposit3(3, 2000.0, member3, "2023-03-22");
-    
-   
-//     Account account1(1, 0, member1);
-//     Account account2(2, 0, member2);
-//     Account account3(3, 0, member3);
+    Deposit deposit1(1, 1000.0, member1, "2023-01-01");
+    Deposit deposit2(2, 2000.0, member2, "2023-03-24");
+    Deposit deposit3(3, 2000.0, member3, "2023-03-22");
     
    
-//     account1.add_loan(loan1);
-//     account1.add_deposit(deposit1);
+    Account account1(1, 0, member1);
+    Account account2(2, 0, member2);
+    Account account3(3, 0, member3);
+    
+   
+    account1.add_loan(loan1);
+    account1.add_deposit(deposit1);
     
     
-//     account2.add_loan(loan2);
-//     account2.add_deposit(deposit2);
+    account2.add_loan(loan2);
+    account2.add_deposit(deposit2);
 
-//     account3.add_loan(loan3);
-//     account3.add_deposit(deposit3);
+    account3.add_loan(loan3);
+    account3.add_deposit(deposit3);
     
   
-//      cout << "Account 1 balance: " << account1.get_balance() << endl;
-//      cout << "Account 2 balance: " << account2.get_balance() << endl;
-//      cout << "Account 3 balance: " << account3.get_balance() << endl;
-//     return 0;
-// }
+    //  cout << "Account 1 balance: " << account1.get_balance() << endl;
+    //  cout << "Account 2 balance: " << account2.get_balance() << endl;
+    //  cout << "Account 3 balance: " << account3.get_balance() << endl;
+    // return 0;
+}
 
-int main() {
-//     int member_id, loan_id, deposit_id, account_id;
+int choice;
+    do {
+        // Display menu and get user's choice
+        cout << "1. View account balance and transactions" << endl;
+        cout << "2. Make a deposit" << endl;
+        cout << "3. Request a loan" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        // Process user's choice
+        switch(choice) {
+            case 1:
+                // View account balance and transactions
+                account1.print_transactions();
+                account2.print_transactions();
+                break;
+            case 2:
+                // Make a deposit
+                float amount;
+                cout << "Enter deposit amount: ";
+                cin >> amount;
+                Deposit deposit(account1.get_deposit_id() + 1, amount, account1.get_account_owner(), "2023-03-26");
+                account1.add_deposit(deposit);
+                cout << "Deposit successful" << endl;
+                break;
+            case 3:
+                // Request a loan
+                float loan_amount, interest_rate;
+                int repayment_period;
+                cout << "Enter loan amount: ";
+                cin >> loan_amount;
+                cout << "Enter interest rate: ";
+                cin >> interest_rate;
+                cout << "Enter repayment period (in months): ";
+                cin >> repayment_period;
+                Loan loan(account1.get_loan_id() + 1, loan_amount, interest_rate, repayment_period, account1.get_account_owner());
+                account1.add_loan(loan);
+                cout << "Loan request submitted" << endl;
+                break;
+            case 4:
+                // Exit
+                cout << "Goodbye" << endl;
+                break;
+            default:
+                cout << "Invalid choice" << endl;
+                break;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int main() {
+// //     int member_id, loan_id, deposit_id, account_id;
 //     string member_name, member_address, member_phone, member_email, deposit_date;
 //     float loan_amount, interest_rate, deposit_amount, account_balance;
 //     int repayment_period;
@@ -241,74 +311,3 @@ int main() {
 // }
 
 
-switch (choice) {
-    case 1:
-        cout << "Enter account ID: ";
-        cin >> account_id;
-        cout << "Enter deposit amount: ";
-        cin >> amount;
-        cout << "Enter member ID: ";
-        cin >> member_id;
-        cout << "Enter date (YYYY-MM-DD): ";
-        cin >> date;
-        if (find_member(members, member_id) == NULL) {
-            cout << "Invalid member ID. Deposit not added." << endl;
-        } else if (find_account(accounts, account_id) == NULL) {
-            cout << "Invalid account ID. Deposit not added." << endl;
-        } else {
-            Member depositor = *find_member(members, member_id);
-            Deposit deposit(deposit_counter++, amount, depositor, date);
-            Account* account = find_account(accounts, account_id);
-            account->add_deposit(deposit);
-            cout << "Deposit added to account." << endl;
-        }
-        break;
-    case 2:
-        cout << "Enter account ID: ";
-        cin >> account_id;
-        cout << "Enter loan ID: ";
-        cin >> loan_id;
-        if (find_account(accounts, account_id) == NULL) {
-            cout << "Invalid account ID. Loan not added." << endl;
-        } else {
-            Account* account = find_account(accounts, account_id);
-            if (account->get_balance() < loan_amount) {
-                cout << "Insufficient funds. Loan not added." << endl;
-            } else {
-                cout << "Enter loan amount: ";
-                cin >> loan_amount;
-                cout << "Enter interest rate: ";
-                cin >> interest_rate;
-                cout << "Enter repayment period: ";
-                cin >> repayment_period;
-                cout << "Enter member ID: ";
-                cin >> member_id;
-                if (find_member(members, member_id) == NULL) {
-                    cout << "Invalid member ID. Loan not added." << endl;
-                } else {
-                    Member borrower = *find_member(members, member_id);
-                    Loan loan(loan_id, loan_amount, interest_rate, repayment_period, borrower);
-                    account->add_loan(loan);
-                    cout << "Loan added to account." << endl;
-                }
-            }
-        }
-        break;
-    case 3:
-        cout << "Enter account ID: ";
-        cin >> account_id;
-        Account* account = find_account(accounts, account_id);
-        if (account == NULL) {
-            cout << "Invalid account ID. Transactions not printed." << endl;
-        } else {
-            account->print_transactions();
-        }
-        break;
-    case 4:
-        return 0;
-    default:
-        cout << "Invalid choice. Try again." << endl;
-        break;
-    }
-}
-return 0;
